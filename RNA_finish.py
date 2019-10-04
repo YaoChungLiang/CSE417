@@ -21,23 +21,23 @@ class RNA:
         if link in [('A', 'U'), ('U', 'A'), ('C', 'G'), ('G', 'C')]:
             return True
         return False
-    def traceback(i, j, structure, tab, sequence):
-        if j <= i:
-            return
-        elif tab[i][j] == tab[i][j-1]:
-            RNA.traceback(i, j-1, structure, tab, sequence)
-        else:
-            for k in [b for b in range(i, j-4) if RNA.pair_check((sequence[b], sequence[j]))]:
-                if k-1 < 0:
-                    if tab[i][j] == tab[k+1][j-1] + 1:
-                        structure.append((k,j))
-                        RNA.traceback(k+1, j-1, structure, tab, sequence)
-                        break
-                elif tab[i][j] == tab[i][k-1] + tab[k+1][j-1] + 1:
-                    structure.append((k,j))
-                    RNA.traceback(i, k-1, structure, tab, sequence)
-                    RNA.traceback(k+1, j-1, structure, tab, sequence)
-                    break
+    def traceback(i, j, structure, tab, sequence):                       ########    highlight from here  #############
+        if j <= i:                                                                                          ########### 
+            return                                                                                              #######
+        elif tab[i][j] == tab[i][j-1]:                                                                      ###########
+            RNA.traceback(i, j-1, structure, tab, sequence)                                                     #######
+        else:                                                                                               ###########
+            for k in [b for b in range(i, j-4) if RNA.pair_check((sequence[b], sequence[j]))]:                  #######
+                if k-1 < 0:                                                                                 ###########
+                    if tab[i][j] == tab[k+1][j-1] + 1:                                                          #######
+                        structure.append((k,j))                                                             ###########
+                        RNA.traceback(k+1, j-1, structure, tab, sequence)                                       #######
+                        break                                                                               ###########
+                elif tab[i][j] == tab[i][k-1] + tab[k+1][j-1] + 1:                                              #######
+                    structure.append((k,j))                                                                 ###########
+                    RNA.traceback(i, k-1, structure, tab, sequence)                                             #######
+                    RNA.traceback(k+1, j-1, structure, tab, sequence)                                       ###########
+                    break                                                ########   hightlight end here ###############
     def write_structure(sequence, structure):
         dot_bracket = ["." for _ in range(len(sequence))]
         for s in structure:
