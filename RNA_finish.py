@@ -41,7 +41,7 @@ class RNA:
     def write_structure(sequence, structure):
         dot_bracket = ["." for _ in range(len(sequence))]
         for s in structure:
-            dot_bracket[min(s)] = "("
+            dot_bracket[min(s)] = "(" 
             dot_bracket[max(s)] = ")"
         return "".join(dot_bracket) , structure
 ################### generate random AUCG #########################333
@@ -103,13 +103,20 @@ class RNA:
                 j=i+k
                 table[i][j]=RNA.opt(i,j)
         return table
+
+        
 #################   main 1  ############################
 if __name__ == "__main__":
-    
+    ######## input arguments ##########
+    rand_option = True                                     # Change to stop/start the random sample 
+    out_file = "out.txt"
+    in_file = "testcase.txt"
+    ####################################
+
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    outfile = open('out.txt','w')
+    outfile = open(out_file,'w')
     for file in os.listdir(dir_path):
-        if file.endswith("testcase.txt"):
+        if file.endswith(in_file):
             with open(file) as f:
                 lines = f.readlines()
             for line in lines:
@@ -130,7 +137,7 @@ if __name__ == "__main__":
                 outfile.write('{}\n'.format(''))
     outfile.close()
     
-    if (True):  # Change to stop/start the random sample 
+    if (rand_option):  # Change to stop/start the random sample 
         m=[]
         runtime_list2=[]
         for i in range(12,13):
