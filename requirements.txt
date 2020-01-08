@@ -1,3 +1,2 @@
 numpy
 python==3.6.5
-scipy
